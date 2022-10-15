@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2 button {
+            width: 26px;
+        }
+
+        h2.collapsed {
+            color: blue;
+        }
+    </style>
+    <script>
+        function toggle(part_id) {
+            if (document.getElementById("btn"+part_id).innerText == "-") {
+                document.getElementById("btn"+part_id).innerText = "+";
+                document.getElementById("div" +part_id).style.display = "none";
+                document.getElementById("part"+part_id).classList.add("collapsed");
+            }
+            else {
+                document.getElementById(`btn${part_id}`).innerText = "-";
+                document.getElementById(`div${part_id}`).style.display = "";
+                document.getElementById(`part${part_id}`).classList.remove("collapsed");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Документ</h1>
+
+    <h2 id = "part1">
+        <button id="btn1" onclick="toggle('1');">-</button>
+        Часть 1
+    </h2>
+    <div id="div1">
+        <p>111 11 111 111111</p>
+        <p>111 11 111 111111</p>
+        <p>111 11 111 111111</p>
+        <p>111 11 111 111111</p>
+    </div>
+    
+    <h2 id="part2">
+        <button id="btn2" onclick="toggle('2');">-</button>
+        Часть 2
+    </h2>
+    <div id="div2">
+        <p>222 22 222 222222</p>
+        <p>222 22 222 222222</p>
+        <p>222 22 222 222222</p>
+        <p>222 22 222 222222</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>Demo</title>
+        <meta charset="utf-8">
+        <style>
+            /*
+            h2 {
+                color: black; 
+                background-color: lightgray;
+            }
+            */
+            h1 {
+                color: red;
+                background-color: yellow;
+            }
+
+            h1.greeting {
+                background-color: cyan;
+                color: pink;
+            }
+        </style>
+        <link rel="stylesheet" href="styles/main.css" />
+
+        <script>
+            function sayHello(){
+                //alert("Hello, world!");
+                document.getElementById("hdr1").innerText = "Hello, world!";
+                document.getElementById("hdr1").className = "greeting";
+            }
+        </script>
+    </head>
+    <body>
+        <!--Это комментарий-->
+        <h1 id="hdr1">Документ</h1>
+        <button onclick="sayHello();">Щелкни здесь</button>
+        <h2>Часть 1</h2>
+        <p>LaLa bubu <br/> 111</p>
+        <p class="notes"> Примечание 1. Ля ля</p>
+        <p>LaLa bubu 222</p>
+        <p>LaLa bubu 333</p>
+        <p class="notes"> Примечание 2. Бу бу</p>
+        <h2>Часть 2</h2>
+        <a href="http://yand.dyndns.org/mephi2022_06">Сайт учебной группы</a> <br />
+        <img src="images/cat.jpg" style="width: 150px" />
+    </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function runAway(){
+            if (document.getElementById("btn").style.marginTop != "200px")
+                document.getElementById("btn").style.marginTop = "200px";
+            else
+                document.getElementById("btn").style.marginTop = "10px";
+        }
+    </script>
+</head>
+<body>
+    <button id="btn" style="margin-top: 10px;" onmouseover="runAway()">Щелкни здесь</button>
+</body>
+</html>

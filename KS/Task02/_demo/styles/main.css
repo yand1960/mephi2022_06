@@ -1,0 +1,11 @@
+h2 {
+    color: lightgrey; 
+    background-color: black;
+    text-align: center;
+}
+
+.notes {
+    background-color: lightgray;
+    width: 30%;
+    border: solid thick black;
+}

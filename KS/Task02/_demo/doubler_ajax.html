@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function calculate() {
+            var url = "api/doubler_service.php?MyNumber="
+                            + document.getElementById("MyNumber").value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.onload = function() {
+                var result = xhr.responseText;
+                document.getElementById("MyNumber").value = result;
+                document.getElementById("imgWait").style.display = "none";
+            }; // функция, которая сработает после окончания работы сервиса
+            document.getElementById("MyNumber").value = "Ждите...";
+            document.getElementById("imgWait").style.display = "";
+            xhr.send();
+        }
+    </script>
+</head>
+<body>
+    
+    <textarea></textarea>
+
+    <h1>Введите ваше число, нажмите на кнопку и мы его удвоим</h1>
+    <input type="text" id="MyNumber" value="" />
+    <button onclick="calculate();">Поехали!</button> <br />
+    <img id="imgWait" src="images/please-wait.gif" style="display: none; width: 70px;" />
+
+</body>
+</html>

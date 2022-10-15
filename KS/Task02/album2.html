@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Альбом</title>
+    <style>
+        img#large {
+            width: 400px;
+        }
+
+        #thumbs img {
+            border: solid white thick;
+        }
+
+        #thumbs img:hover {
+            border: solid blue thick;
+            cursor: pointer;
+        }
+        
+        #thumbs img.selected {
+            border: solid red thick;
+        }
+
+        #photoInfoActive {
+            display: inline-block;
+            border: 1px solid black;
+        }
+
+    </style>
+    
+    <script src="scripts/jquery-3.6.1.js"></script>
+
+    <script>
+
+        function showLarge(element) {
+            var large_photo = $(element).attr("src");
+            var splitted = large_photo.split(".");
+            //console.log(splitted); // Код для отладки
+            large_photo = splitted[0] + "-large." + splitted[1];
+            //console.log(large_photo); // Код для отладки
+            $("#large").attr("src", large_photo);
+            $("#thumbs img").removeClass("selected");
+            $(element).addClass("selected");
+            
+            var photoID = $(element).attr("id");
+            getPhotoInfo(photoID);
+        }
+        
+        // function getThumbsVanilla() {
+        //     var url = "api/photos_ws.php";
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open("GET", url);
+        //     xhr.onload = function() { // когда запрос сработает, выполнится эта функция
+        //         let text = xhr.responseText;
+        //         //console.log(text);
+        //         let photos = JSON.parse(text);
+        //         // console.log(photos);
+        //         let output = "";
+        //         for(let i=0; i < photos.length; i++) {
+        //             let f = photos[i];
+        //             output += `<img src="images/${f}" onclick="showLarge(this);"/>`;
+        //             //console.log(s);
+        //         }
+        //         document.getElementById("thumbs").innerHTML = output;
+        //     };
+        //     xhr.send();
+        // }
+
+        function getThumbs() {
+            var url = "api/photos_ws.php";
+            $.getJSON(url, function(photos){
+                let output = "";
+                for(let i=0; i < photos.length; i++) {
+                    let f = photos[i]["fileName"];
+                    let photoID = photos[i]["photoID"];
+                    output += `<img src="images/${f}" id=${photoID} onclick="showLarge(this);"/>`;
+                }
+                $("#thumbs").html(output);
+            });
+        }
+
+        function getPhotoInfo(id) {
+            var url = "api/info_ws.php?id=" + id;
+            $.getJSON(url, function(info) {
+                let name = info["name"];
+                let data = info["data"];
+                let keywords = info["keywords"];
+                let output = `<div id='photoInfoActive'>Имя: <b>${name}</b><br />
+                                    Дата съемки: <b>${data}</b><br />
+                                    Ключевые слова: <b>${keywords}</b>
+                                </div>`;
+                $("#photoInfo").html(output);
+            });
+        }
+
+    </script>
+</head>
+<body onload="getThumbs();">
+    <h1>Фотоальбом</h1>
+    <div id="thumbs">
+        Загрузка фотографий...
+    </div>
+    <table>
+        <tr>
+        <td><img src="" id="large" /></td>
+        <td id="photoInfo"></td>
+        </tr>
+    </table>
+</body>
+</html>
